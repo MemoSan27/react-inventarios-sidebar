@@ -8,7 +8,7 @@ interface SidebarProps {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function Sidebar({ state, setState }:SidebarProps) {
+export const Sidebar = ({ state, setState }:SidebarProps) => {
 
   return (
     <Main $isopen={state.toString()}>
@@ -64,6 +64,8 @@ export function Sidebar({ state, setState }:SidebarProps) {
     </Main>
   );
 }
+
+//*STYLES
 const Container = styled.div<{ $isopen: string }>`
   color: ${(props) => props.theme.text};
   background: ${(props) => props.theme.bg};

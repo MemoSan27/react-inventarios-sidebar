@@ -5,10 +5,12 @@ import { ThemeContext, ThemeContextProps } from "../../App";
 
 
 export function ToggleTema() {
+
   const { setTheme } = useContext(ThemeContext);
   const CambiarTheme = () => {
     setTheme((theme) => (theme === "light" ? "dark" : "light"));
   };
+
   return (
     <Container>
       <div className="container">
@@ -123,7 +125,9 @@ export function ToggleTema() {
       </div>
     </Container>
   );
-}
+};
+
+//*STYLES
 const Container = styled.div`
   .toggle {
     width: 46px;

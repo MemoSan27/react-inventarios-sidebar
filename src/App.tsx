@@ -42,7 +42,7 @@ function App() {
   )
 }
 
-
+//*STYLES
 const Container = styled.main`
   display: grid;
   grid-template-columns: 1fr;

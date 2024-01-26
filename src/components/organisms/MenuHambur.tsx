@@ -1,23 +1,68 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { ToggleTema, SidebarCard } from '.';
+import { v, LinksArray, SecondarylinksArray } from '../..';
+import { useState } from 'react';
 
 export function MenuHambur(){
+
+    const [click, setClick] = useState(false);
+
     return(
     <Container>
         <NavBar>
             <section>
-                <HamburgerMenu>
-                <input hidden className="check-icon" id="check-icon" name="check-icon" type="checkbox" />
-                <label className="icon-menu" htmlFor="check-icon">
-                    <div className="bar bar--1"></div>
-                    <div className="bar bar--2"></div>
-                    <div className="bar bar--3"></div>
-                </label>
+                <HamburgerMenu onClick={() => setClick(!click)}>
+                  <label
+                    className={click ? "toggle active" : "toggle"}
+                    htmlFor="checkbox"
+                  >
+                    <div className="bars" id="bar1"></div>
+                    <div className="bars" id="bar2"></div>
+                    <div className="bars" id="bar3"></div>
+                  </label>
                 </HamburgerMenu>
+                <Menu $click={click.toString()}>
+                    {LinksArray.map(({ icon, label, to }) => (
+                        <div
+                          onClick={() => setClick(!click)}
+                          className="LinkContainer"
+                          key={label}
+                        >
+                          <NavLink
+                            to={to}
+                            className="Links"
+                          >
+                            <div className="Linkicon">{icon}</div>
+                            <span>{label}</span>
+                          </NavLink>
+                        </div>
+                      ))}
+                      <Divider />
+                      {SecondarylinksArray.map(({ icon, label, to }) => (
+                        <div
+                          onClick={() => setClick(!click)}
+                          className="LinkContainer"
+                          key={label}
+                        >
+                          <NavLink
+                            to={to}
+                            className="Links"
+                          >
+                            <div className="Linkicon">{icon}</div>
+                            <span>{label}</span>
+                          </NavLink>
+                        </div>
+                      ))}
+                      <ToggleTema/>
+                      <Divider />
+                </Menu>
             </section>
         </NavBar> 
     </Container>)
 }
 
+//*STYLES
 const Container = styled.div`
     background-color: ${(props) => props.theme.body};
 `
@@ -30,66 +75,109 @@ const NavBar = styled.nav`
 `
 
 const HamburgerMenu = styled.span`
-    position: fixed;
-    top: 2rem;
-    left: 10px;
-    z-index: 100;
-    .icon-menu {
-  --gap: 5px;
-  --height-bar: 2.5px;
-  --pos-y-bar-one: 0;
-  --pos-y-bar-three: 0;
-  --scale-bar: 1;
-  --rotate-bar-one: 0;
-  --rotate-bar-three: 0;
-  width: 25px;
+  position: fixed;
+  top: 2rem;
+  z-index: 100;
+  #checkbox {
+    display: none;
+  }
+
+  .toggle {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition-duration: 0.5s;
+    &.active {
+      transition-duration: 0.5s;
+      transform: rotate(180deg);
+      .bars {
+        
+        position: absolute;
+        transition-duration: 0.5s;
+      }
+      #bar2 {
+        transform: scaleX(0);
+        transition-duration: 0.5s;
+      }
+      #bar1 {
+        width: 100%;
+        transform: rotate(45deg);
+        transition-duration: 0.5s;
+      }
+      #bar3 {
+        width: 100%;
+        transform: rotate(-45deg);
+        transition-duration: 0.5s;
+      }
+    }
+  }
+
+  .bars {
+    width: 100%;
+    height: 4px;
+    background-color:${({theme})=>theme.text};
+    border-radius: 4px;
+  }
+
+  #bar2 {
+    transition-duration: 0.8s;
+  }
+
+  #bar1,
+  #bar3 {
+    width: 70%;
+  }
+`;
+
+const Menu = styled.div<{ $click: string }>`
   display: flex;
+  align-items: center;
+  list-style: none;
+  z-index: 10;
   flex-direction: column;
-  gap: var(--gap);
-  cursor: pointer;
-  position: relative;
-}
+  position: fixed;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  background-color: ${(props) => `rgba(${props.theme.bodyRgba}, 0.85)`};
+  backdrop-filter: blur(3px);
+  transform: ${(props) => props.$click === "true" ? "translateY(0)" : "translateY(1000%)"};
+  transition: all 300ms ease;
 
-.bar {
-  position: relative;
-  height: var(--height-bar);
+  .LinkContainer{
+    &:hover{
+      background-color: ${(props) => props.theme.bgAlpha}
+    }
+
+    .Links{
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: ${(props) => props.theme.text};
+      height: 80px;
+      .Linkicon{
+        padding: ${v.smSpacing} ${v.mdSpacing};
+        display: flex;
+        svg{
+          font-size: 25px;
+        }
+      }
+    }
+  } 
+`;
+const Divider = styled.div`
+  height: 1px;
   width: 100%;
-  border-radius: .5rem;
-  background-color: #9941fc;
-}
-
-.bar--1 {
-  top: var(--pos-y-bar-one);
-  transform: rotate(var(--rotate-bar-one));
-  transition: top 200ms 100ms, transform 100ms;
-}
-
-.bar--2 {
-  transform: scaleX(var(--scale-bar));
-  transition: transform 150ms 100ms;
-}
-
-.bar--3 {
-  bottom: var(--pos-y-bar-three);
-  transform: rotate(var(--rotate-bar-three));
-  transition: bottom 200ms 100ms, transform 100ms;
-}
-
-.check-icon:checked + .icon-menu > .bar--1 {
-  transition: top 200ms, transform 200ms 100ms;
-}
-
-.check-icon:checked + .icon-menu > .bar--3 {
-  transition: bottom 200ms, transform 200ms 100ms;
-}
-
-.check-icon:checked + .icon-menu {
-  --pos-y-bar-one: calc(var(--gap) + var(--height-bar));
-  --pos-y-bar-three: calc(var(--gap) + var(--height-bar));
-  --scale-bar: 0;
-  --rotate-bar-one: 45deg;
-  --rotate-bar-three: -45deg;
-}
-/* FIN ICON-MENU */
-
-`
+  background: ${(props) => props.theme.bg4};
+  margin: ${() => v.lgSpacing} 0;
+`;

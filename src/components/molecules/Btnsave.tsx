@@ -11,6 +11,8 @@ interface BtnSaveProps {
 }
 
 export const Btnsave  = ( { funcion, titulo, bgcolor, icono, url }:BtnSaveProps ) => {
+
+  
   return (
     <Container type="submit" $bgcolor={bgcolor}>
    
@@ -26,6 +28,8 @@ export const Btnsave  = ( { funcion, titulo, bgcolor, icono, url }:BtnSaveProps 
     </Container>
   );
 }
+
+//*STYLES
 const Container = styled.button<{ $bgcolor: string }>`
   display: flex;
   justify-content: center;

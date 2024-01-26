@@ -16,7 +16,7 @@ export const Light ={
    fontButton: "0.875em",
    navHeight: "5rem",
    whiteBg:"#f7b272",
-   bg: "rgb(255,255,255)",
+   bg: "rgb(122,122,122)",
    bgAlpha: "#f2f2f2",
    bg2: "rgb(245,245,245)",
    bg3: "#fff",
@@ -27,6 +27,7 @@ export const Light ={
    bgtgderecha:"#eeeeee",
    colorToggle:"#F9743B",
    translateToggle:"-12px",
+   textSb: "white",
   
    logorotate:"360deg",
    slideroffset:"0.3em",
@@ -59,7 +60,7 @@ export const Dark = {
    fontButton: "0.875em",
    navHeight: "5rem",
    whiteBg:"#f59674",
-   bg: "#272727",
+   bg: "rgba(8,14,144)",
    bgAlpha: "rgba(0,0,0,.3)",
    bg2: "rgb(30,30,30)",
    bg3: "#2C2C2E",
@@ -69,6 +70,7 @@ export const Dark = {
    bgtotal:"#1C1C1E",
    colorToggle:"rgb(52, 131, 235)",
    translateToggle:"26px",
+   textSb: "white",
   
    logorotate:"-360deg",
    slideroffset:"0.3em",

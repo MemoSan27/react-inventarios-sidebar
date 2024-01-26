@@ -5,8 +5,9 @@ export function HomeTemplate(){
     <Container>
         <h1> Home Template </h1>
     </Container>)
-}
+};
 
+//*STYLES
 const Container = styled.div`
     display: flex;
     justify-content: center;
