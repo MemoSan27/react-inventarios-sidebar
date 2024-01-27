@@ -78,6 +78,7 @@ const HamburgerMenu = styled.span`
   position: fixed;
   top: 2rem;
   z-index: 100;
+  
   #checkbox {
     display: none;
   }
@@ -152,6 +153,7 @@ const Menu = styled.div<{ $click: string }>`
   backdrop-filter: blur(3px);
   transform: ${(props) => props.$click === "true" ? "translateY(0)" : "translateY(1000%)"};
   transition: all 300ms ease;
+  
 
   .LinkContainer{
     &:hover{
@@ -180,4 +182,5 @@ const Divider = styled.div`
   width: 100%;
   background: ${(props) => props.theme.bg4};
   margin: ${() => v.lgSpacing} 0;
+  
 `;

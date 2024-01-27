@@ -77,6 +77,7 @@ const Container = styled.div<{ $isopen: string }>`
   transition: 0.1s ease-in-out;
   overflow-y: auto;
   overflow-x: hidden;
+  box-shadow: ${(props) => props.theme.boxShadow};
   &::-webkit-scrollbar {
     width: 6px;
     border-radius: 10px;

@@ -1,7 +1,10 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import styled, { ThemeProvider } from 'styled-components';
-import { AuthContextProvider, MyRoutes, Light, Dark, Sidebar, MenuHambur } from './';
+import { AuthContextProvider, MyRoutes, Light, Dark, Sidebar, MenuHambur, Login } from './';
 import { createContext, useState } from 'react';
 import { Device } from './styles/breakpoints';
+import { useLocation } from 'react-router-dom';
+
 
 export interface ThemeContextProps {
   theme: string;
@@ -16,24 +19,34 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const theme = themeuse === 'light' ? 'light' : 'dark';
   const themeStyle = theme === 'light' ? Light : Dark;
-
+  const { pathname } = useLocation();
 
   return (
     <>
     <ThemeContext.Provider value={{theme, setTheme}}>
       <ThemeProvider theme={themeStyle}>
         <AuthContextProvider>
-          <Container className={sidebarOpen ? 'active': ''}>
-            <section className='ContentSidebar'>
-              <Sidebar state={sidebarOpen} setState={() => setSidebarOpen(!sidebarOpen)} />
-            </section>
-            <section className='ContentMenuambur'>
-              <MenuHambur />
-            </section>
-            <section className='ContentRoutes'>
-              <MyRoutes />
-            </section>
-          </Container>
+          {
+            pathname != "/login" 
+            ? (
+                <Container className={sidebarOpen ? 'active': ''}>
+                  <section className='ContentSidebar'>
+                    <Sidebar state={sidebarOpen} setState={() => setSidebarOpen(!sidebarOpen)} />
+                  </section>
+                  <section className='ContentMenuambur'>
+                    <MenuHambur />
+                  </section>
+                  <section className='ContentRoutes'>
+                    <MyRoutes />
+                  </section>
+                </Container>
+              )
+            : (
+                <Login />
+              )
+          }
+          
+          <ReactQueryDevtools initialIsOpen={false} />
         </AuthContextProvider>
       </ThemeProvider>
     </ThemeContext.Provider>

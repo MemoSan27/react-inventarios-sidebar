@@ -1,6 +1,6 @@
-import { HomeTemplate } from '../components/templates/HomeTemplate';
+import { HomeTemplate } from '..';
 
-export function Home(){
+export const Home = () => {
     return(
    <HomeTemplate />
    )
