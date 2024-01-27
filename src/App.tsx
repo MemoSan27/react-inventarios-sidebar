@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 
 export interface ThemeContextProps {
   theme: string;
-  setTheme: React.Dispatch<React.SetStateAction<string>>;
+  setTheme: (React.Dispatch<React.SetStateAction<string>>);
 }
 
 export const ThemeContext = createContext<ThemeContextProps | null>(null);
